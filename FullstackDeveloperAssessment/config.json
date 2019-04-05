@@ -1,0 +1,5 @@
+{
+	"ConnectionStrings": {
+		"AppConnection": "@\"Server=NETUNO\\SQLEXPRESS;Database=FullstackDeveloperAssessment;Trusted_Connection=True;ConnectRetryCount=0"
+	}
+}

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FullstackDeveloperAssessment.Data\FullstackDeveloperAssessment.Data.csproj" />
+    <ProjectReference Include="..\FullstackDeveloperAssessment.Domain\FullstackDeveloperAssessment.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
