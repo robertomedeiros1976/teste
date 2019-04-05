@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FullstackDeveloperAssessment.Data.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20190405055201_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20190405150438_InitialMigrate")]
+    partial class InitialMigrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,7 +59,7 @@ namespace FullstackDeveloperAssessment.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(30);
 
-                    b.Property<int>("PersonVAT");
+                    b.Property<int?>("PersonVAT");
 
                     b.Property<string>("PostalZipCode")
                         .IsRequired()
@@ -76,6 +76,25 @@ namespace FullstackDeveloperAssessment.Data.Migrations
                     b.ToTable("PersonAddresses");
                 });
 
+            modelBuilder.Entity("FullstackDeveloperAssessment.Domain.Entyties.PersonPersonType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PersonTypeId");
+
+                    b.Property<int?>("PersonVAT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonTypeId");
+
+                    b.HasIndex("PersonVAT");
+
+                    b.ToTable("PersonPersonType");
+                });
+
             modelBuilder.Entity("FullstackDeveloperAssessment.Domain.Entyties.PersonType", b =>
                 {
                     b.Property<int>("Id")
@@ -86,15 +105,7 @@ namespace FullstackDeveloperAssessment.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(30);
 
-                    b.Property<int>("PersonVAT");
-
-                    b.Property<int?>("PersonVAT1");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PersonVAT");
-
-                    b.HasIndex("PersonVAT1");
 
                     b.ToTable("PersonTypes");
                 });
@@ -111,20 +122,18 @@ namespace FullstackDeveloperAssessment.Data.Migrations
                 {
                     b.HasOne("FullstackDeveloperAssessment.Domain.Entyties.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("PersonVAT")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PersonVAT");
                 });
 
-            modelBuilder.Entity("FullstackDeveloperAssessment.Domain.Entyties.PersonType", b =>
+            modelBuilder.Entity("FullstackDeveloperAssessment.Domain.Entyties.PersonPersonType", b =>
                 {
-                    b.HasOne("FullstackDeveloperAssessment.Domain.Entyties.Person")
-                        .WithMany("PersonTypes")
-                        .HasForeignKey("PersonVAT")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("FullstackDeveloperAssessment.Domain.Entyties.PersonType", "PersonType")
+                        .WithMany("PersonPersonTypes")
+                        .HasForeignKey("PersonTypeId");
 
                     b.HasOne("FullstackDeveloperAssessment.Domain.Entyties.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonVAT1");
+                        .WithMany("PersonPersonTypes")
+                        .HasForeignKey("PersonVAT");
                 });
 #pragma warning restore 612, 618
         }

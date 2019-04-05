@@ -6,8 +6,7 @@ namespace FullstackDeveloperAssessment.Domain.Entyties
 {
 	public class PersonAddress
 	{
-		public int Id { get; set; }
-		public int PersonVAT { get; set; }
+		public int Id { get; set; }		
 		public string Address { get; set; }
 		public string City { get; set; }
 		public string StateProvinceRegion { get; set; }

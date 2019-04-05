@@ -11,10 +11,7 @@ namespace FullstackDeveloperAssessment.Data.Mapping
 	{
 		public void Configure(EntityTypeBuilder<Person> builder)
 		{
-			builder.HasKey(p => p.VAT);
-
-			builder.HasMany(p => p.PersonTypes)
-				.WithOne();
+			builder.HasKey(p => p.VAT);			
 
 			builder.HasOne(p => p.PersonAddress)
 				.WithMany();

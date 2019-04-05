@@ -4,10 +4,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FullstackDeveloperAssessment.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "PersonTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(maxLength: 30, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonTypes", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Persons",
                 columns: table => new
@@ -29,12 +42,12 @@ namespace FullstackDeveloperAssessment.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PersonVAT = table.Column<int>(nullable: false),
                     Address = table.Column<string>(maxLength: 50, nullable: false),
                     City = table.Column<string>(maxLength: 30, nullable: false),
                     StateProvinceRegion = table.Column<string>(maxLength: 50, nullable: false),
                     PostalZipCode = table.Column<string>(maxLength: 10, nullable: false),
-                    Country = table.Column<string>(maxLength: 30, nullable: false)
+                    Country = table.Column<string>(maxLength: 30, nullable: false),
+                    PersonVAT = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,31 +57,30 @@ namespace FullstackDeveloperAssessment.Data.Migrations
                         column: x => x.PersonVAT,
                         principalTable: "Persons",
                         principalColumn: "VAT",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PersonTypes",
+                name: "PersonPersonType",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PersonVAT = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(maxLength: 30, nullable: false),
-                    PersonVAT1 = table.Column<int>(nullable: true)
+                    PersonVAT = table.Column<int>(nullable: true),
+                    PersonTypeId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonTypes", x => x.Id);
+                    table.PrimaryKey("PK_PersonPersonType", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PersonTypes_Persons_PersonVAT",
+                        name: "FK_PersonPersonType_PersonTypes_PersonTypeId",
+                        column: x => x.PersonTypeId,
+                        principalTable: "PersonTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PersonPersonType_Persons_PersonVAT",
                         column: x => x.PersonVAT,
-                        principalTable: "Persons",
-                        principalColumn: "VAT",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PersonTypes_Persons_PersonVAT1",
-                        column: x => x.PersonVAT1,
                         principalTable: "Persons",
                         principalColumn: "VAT",
                         onDelete: ReferentialAction.Restrict);
@@ -80,14 +92,14 @@ namespace FullstackDeveloperAssessment.Data.Migrations
                 column: "PersonVAT");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonTypes_PersonVAT",
-                table: "PersonTypes",
-                column: "PersonVAT");
+                name: "IX_PersonPersonType_PersonTypeId",
+                table: "PersonPersonType",
+                column: "PersonTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonTypes_PersonVAT1",
-                table: "PersonTypes",
-                column: "PersonVAT1");
+                name: "IX_PersonPersonType_PersonVAT",
+                table: "PersonPersonType",
+                column: "PersonVAT");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Persons_PersonAddresses_VAT",
@@ -103,6 +115,9 @@ namespace FullstackDeveloperAssessment.Data.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_PersonAddresses_Persons_PersonVAT",
                 table: "PersonAddresses");
+
+            migrationBuilder.DropTable(
+                name: "PersonPersonType");
 
             migrationBuilder.DropTable(
                 name: "PersonTypes");
