@@ -37,7 +37,7 @@ namespace FullstackDeveloperAssessment.Data.Repository
 			return result > 0;
 		}
 
-		public bool Remove(long Id)
+		public bool Remove(int Id)
 		{
 			_context.Set<T>().Remove(Select(Id));
 			int result = _context.SaveChanges();
@@ -45,7 +45,7 @@ namespace FullstackDeveloperAssessment.Data.Repository
 			return result > 0;
 		}
 
-		public T Select(long Id)
+		public T Select(int Id)
 		{
 			return _context.Set<T>().Find(Id);
 		}

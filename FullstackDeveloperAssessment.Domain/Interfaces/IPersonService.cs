@@ -11,6 +11,7 @@ namespace FullstackDeveloperAssessment.Domain.Interfaces
 		IEnumerable<Person> ListPersons();
 		IEnumerable<Person> ListLastPersons();
 		IEnumerable<Person> SearchPerson(Func<Person, bool> criteria);
+		Person Get(int Id);
 
 
 	}

@@ -16,6 +16,18 @@ namespace FullstackDeveloperAssessment.Service.Services
 			this._repository = repository;
 		}
 
+		public Person Get(int Id)
+		{
+			try
+			{
+				return _repository.Select(Id);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+		}
+
 		IEnumerable<Person> IPersonService.ListLastPersons()
 		{
 			try

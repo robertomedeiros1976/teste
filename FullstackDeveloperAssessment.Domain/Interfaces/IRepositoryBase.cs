@@ -8,8 +8,8 @@ namespace FullstackDeveloperAssessment.Domain.Interfaces
 	{
 		bool Insert(T entity);
 		bool Update(T entity);
-		bool Remove(long Id);
-		T Select(long Id);
+		bool Remove(int Id);
+		T Select(int Id);
 		IList<T> SelectAll();
 		IList<T> Search(Func<T, bool> criteria);
 		IList<T> SelectLastPersons();

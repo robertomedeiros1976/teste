@@ -15,6 +15,18 @@ namespace FullstackDeveloperAssessment.Logic.Logics
 			this._service = service;
 		}
 
+		public Person GetById(int Id)
+		{
+			try
+			{
+				return _service.Get(Id);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+		}
+
 		public IEnumerable<Person> SelectLastRecords()
 		{
 			try

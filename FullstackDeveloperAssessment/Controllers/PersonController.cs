@@ -1,4 +1,6 @@
-﻿using FullstackDeveloperAssessment.Logic.Logics;
+﻿using FullstackDeveloperAssessment.Domain.Entyties;
+using FullstackDeveloperAssessment.Logic.Logics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,11 +21,25 @@ namespace FullstackDeveloperAssessment.Controllers
 			this._personTypeLogic = personTypeLogic;
 		}
 
+		[HttpGet]
 		public IActionResult Get()
 		{
 			try
 			{
 				return Ok(this._personTypeLogic.SelectAllPersonTypes());
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
+
+		[HttpGet("{id}")]		
+		public IActionResult Get(int Id)
+		{
+			try
+			{
+				return Ok(this._personLogic.GetById(Id));
 			}
 			catch (Exception ex)
 			{
