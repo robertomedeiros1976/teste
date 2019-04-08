@@ -12,5 +12,6 @@ namespace FullstackDeveloperAssessment.Domain.Interfaces
 		T Select(long Id);
 		IList<T> SelectAll();
 		IList<T> Search(Func<T, bool> criteria);
+		IList<T> SelectLastPersons();
 	}
 }

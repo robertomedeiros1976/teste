@@ -13,7 +13,8 @@ namespace FullstackDeveloperAssessment.Domain.Entyties
 		public DateTime DateOfBirth { get; set; }
 		public virtual IEnumerable<PersonPersonType> PersonPersonTypes { get; set; }
 		public Gender Gender { get; set; }
-		public string SecretCode { get; set; }		
+		public string SecretCode { get; set; }
+		public DateTime DateOfRecord { get; set; }
 
 	}
 

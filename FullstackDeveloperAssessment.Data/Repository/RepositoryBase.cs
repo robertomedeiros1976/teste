@@ -55,6 +55,11 @@ namespace FullstackDeveloperAssessment.Data.Repository
 			return _context.Set<T>().ToList();
 		}
 
+		public IList<T> SelectLastPersons()
+		{
+			return _context.Set<T>().ToList();
+		}
+
 		public bool Update(T entity)
 		{
 			_context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
