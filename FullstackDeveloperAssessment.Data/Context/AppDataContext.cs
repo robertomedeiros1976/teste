@@ -16,13 +16,15 @@ namespace FullstackDeveloperAssessment.Data.Context
 
 		public DbSet<PersonType> PersonTypes { get; set; }
 		public DbSet<PersonAddress> PersonAddresses { get; set; }
-		public DbSet<Person> Persons { get; set; }		
+		public DbSet<Person> Persons { get; set; }
+		public DbSet<PersonPersonType> PersonsPersonTypes { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new PersonTypeMapping());
 			modelBuilder.ApplyConfiguration(new PersonAddressMapping());
 			modelBuilder.ApplyConfiguration(new PersonMapping());
+			modelBuilder.ApplyConfiguration(new PersonPersonTypeMapping());
 
 			base.OnModelCreating(modelBuilder);
 		}
