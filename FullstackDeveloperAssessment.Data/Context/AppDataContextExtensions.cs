@@ -15,18 +15,15 @@ namespace FullstackDeveloperAssessment.Data.Context
 				context.AddRange(new PersonType[]
 				{
 					new PersonType()
-					{
-						Id = 1,
+					{						
 						Description = "Farmer"						
 					},
 					new PersonType()
 					{
-						Id = 2,
 						Description = "Veterinary"
 					},
 					new PersonType()
 					{
-						Id = 3,
 						Description = "Owner"
 					},
 				});
@@ -39,7 +36,7 @@ namespace FullstackDeveloperAssessment.Data.Context
 				context.AddRange(new Person[]
 				{
 					new Person()
-					{
+					{						
 						Name = "John Jones",
 						DateOfBirth = new DateTime(1977, 2, 6),
 						DateOfRecord = DateTime.Now,
@@ -49,6 +46,7 @@ namespace FullstackDeveloperAssessment.Data.Context
 
 					new Person()
 					{
+						
 						Name = "Mary Jane",
 						DateOfBirth = new DateTime(1983, 10, 16),
 						DateOfRecord = DateTime.Now,
@@ -58,6 +56,7 @@ namespace FullstackDeveloperAssessment.Data.Context
 
 					new Person()
 					{
+						
 						Name = "Roberto Medeiros",
 						DateOfBirth = new DateTime(1976, 11, 1),
 						DateOfRecord = DateTime.Now,

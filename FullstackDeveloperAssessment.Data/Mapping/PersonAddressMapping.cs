@@ -11,7 +11,7 @@ namespace FullstackDeveloperAssessment.Data.Mapping
 			builder.HasKey(p => p.Id);
 
 			builder.HasOne(p => p.Person)
-				.WithOne(p => p.PersonAddress)
+				.WithOne(p => p.PersonAddress)				
 				.IsRequired();
 
 			builder.Property(p => p.Address)
