@@ -3,6 +3,7 @@ using FullstackDeveloperAssessment.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FullstackDeveloperAssessment.Logic.Logics
 {
@@ -63,11 +64,11 @@ namespace FullstackDeveloperAssessment.Logic.Logics
 			}
 		}
 
-		public bool SavePerson(Person person)
+		public async Task<Person> SavePerson(Person person)
 		{
 			try
 			{
-				return _service.Save(person);
+				return await _service.Save(person);
 			}
 			catch (Exception ex)
 			{

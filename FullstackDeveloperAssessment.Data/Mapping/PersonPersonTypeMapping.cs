@@ -13,8 +13,8 @@ namespace FullstackDeveloperAssessment.Data.Mapping
 		{
 			builder.HasKey(p => p.Id);
 
-			builder.HasOne(p => p.Person)				
-				.WithMany(p => p.PersonPersonTypes);
+			//builder.HasOne(p => p.Person)				
+			//	.WithMany(p => p.PersonTypes);
 
 			builder.HasOne(p => p.PersonType)
 				.WithMany(p => p.PersonPersonTypes);

@@ -4,14 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FullstackDeveloperAssessment.Service.Services
 {
 	public class PersonService : IPersonService
 	{
-		private IRepositoryBase<Person> _repository;
+		private IPersonRepository _repository;
 
-		public PersonService(IRepositoryBase<Person> repository)
+		public PersonService(IPersonRepository repository)
 		{
 			this._repository = repository;
 		}
@@ -28,7 +29,7 @@ namespace FullstackDeveloperAssessment.Service.Services
 			}
 		}
 
-		IEnumerable<Person> IPersonService.ListLastPersons()
+		public IEnumerable<Person> ListLastPersons()
 		{
 			try
 			{
@@ -40,7 +41,7 @@ namespace FullstackDeveloperAssessment.Service.Services
 			}
 		}
 
-		IEnumerable<Person> IPersonService.ListPersons()
+		public IEnumerable<Person> ListPersons()
 		{
 			try
 			{
@@ -52,17 +53,17 @@ namespace FullstackDeveloperAssessment.Service.Services
 			}
 		}
 
-		bool IPersonService.Save(Person person)
+		public async Task<Person> Save(Person person)
 		{
 			try
 			{
 				if (person.VAT == 0)
 				{
-					return this._repository.Insert(person);
+					return await this._repository.InsertAsync(person);
 				}
 				else
 				{
-					return this._repository.Update(person);
+					return await this._repository.UpdateAsync(person);
 				}
 			}
 			catch (Exception ex)
@@ -72,7 +73,7 @@ namespace FullstackDeveloperAssessment.Service.Services
 			
 		}
 
-		IEnumerable<Person> IPersonService.SearchPerson(Func<Person, bool> criteria)
+		public IEnumerable<Person> SearchPerson(Func<Person, bool> criteria)
 		{
 			try
 			{

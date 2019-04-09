@@ -1,5 +1,6 @@
 ﻿using FullstackDeveloperAssessment.Domain.Entyties;
 using FullstackDeveloperAssessment.Logic.Logics;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace FullstackDeveloperAssessment.Controllers
 {
+	[EnableCors("CorsPolicy")]
 	[Route("api/[Controller]")]
+	[ApiController]
 	public class PersonController : Controller
 	{
 		private PersonLogic _personLogic;
@@ -45,6 +48,15 @@ namespace FullstackDeveloperAssessment.Controllers
 			{
 				return BadRequest(ex.Message);
 			}
+		}
+
+		[HttpPost]
+		[ProducesResponseType(typeof(Person), StatusCodes.Status201Created)]
+		public async Task<IActionResult> CreateAsync([FromBody] Person person)
+		{
+			await _personLogic.SavePerson(person);
+
+			return CreatedAtAction(nameof(Get), new { Id = person.VAT }, person);
 		}
 	}
 }

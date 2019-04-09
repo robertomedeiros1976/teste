@@ -8,9 +8,9 @@ namespace FullstackDeveloperAssessment.Service.Services
 {
 	public class PersonTypeService : IPersonTypeService
 	{
-		private IRepositoryBase<PersonType> _repository;
+		private IPersonTypeRepository _repository;
 
-		public PersonTypeService(IRepositoryBase<PersonType> repository)
+		public PersonTypeService(IPersonTypeRepository repository)
 		{
 			this._repository = repository;
 		}

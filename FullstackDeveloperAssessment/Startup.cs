@@ -45,6 +45,13 @@ namespace FullstackDeveloperAssessment
 			app.UseCors("CorsPolicy");
 			app.UseStaticFiles();
 			app.UseMvcWithDefaultRoute();
+
+			using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+			{
+				var context = scope.ServiceProvider.GetService<AppDataContext>();
+				context.Database.Migrate();
+				context.EnsureDatabaseSeeded();
+			}
 		}
 
 
