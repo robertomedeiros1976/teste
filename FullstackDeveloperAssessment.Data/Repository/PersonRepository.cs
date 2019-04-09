@@ -51,22 +51,22 @@ namespace FullstackDeveloperAssessment.Data.Repository
 
 		public IList<Person> Search(Func<Person, bool> criteria)
 		{
-			return _context.Persons.Include(a => a.PersonAddress).Include(a => a.PersonTypes).Where(criteria).ToList();
+			return _context.Persons.Include(a => a.PersonAddress).Include(a => a.PersonPersonTypes).Where(criteria).ToList();
 		}
 
 		public Person Select(int Id)
 		{
-			return _context.Persons.Include(a => a.PersonAddress).Include(a => a.PersonTypes).FirstOrDefault(a => a.VAT == Id);
+			return _context.Persons.Include(a => a.PersonAddress).Include(a => a.PersonPersonTypes).FirstOrDefault(a => a.VAT == Id);
 		}
 
 		public IList<Person> SelectAll()
 		{
-			return _context.Persons.Include(a => a.PersonAddress).Include(a => a.PersonTypes).ToList();
+			return _context.Persons.Include(a => a.PersonAddress).Include(a => a.PersonPersonTypes).ToList();
 		}
 
 		public IList<Person> SelectLastPersons()
 		{
-			return _context.Persons.Include(a => a.PersonAddress).Include(a => a.PersonTypes).Take(0).Skip(5).ToList();
+			return _context.Persons.Include(a => a.PersonAddress).Include(a => a.PersonPersonTypes).Take(0).Skip(5).ToList();
 		}
 
 		public async Task<Person> UpdateAsync(Person entity)
