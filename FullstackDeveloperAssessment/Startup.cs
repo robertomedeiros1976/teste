@@ -27,24 +27,16 @@ namespace FullstackDeveloperAssessment
 			var sqlConnection = _configuration.GetConnectionString("AppConnection");
 			services.AddDbContext<AppDataContext>(options => options.UseSqlServer(sqlConnection, b => b.MigrationsAssembly("FullstackDeveloperAssessment.Data")));
 
-			services.AddCors(options => {
-				options.AddPolicy("CorsPolicy", builder => {
-					builder
-					.WithOrigins("http://localhost:4200")
-					.AllowAnyHeader()
-					.AllowAnyMethod();
-				});
-			});
-
+			services.AddCors();
 			services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
-			app.UseCors("CorsPolicy");
-			app.UseStaticFiles();
-			app.UseMvcWithDefaultRoute();
+			app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200"));
+			//app.UseStaticFiles();
+			app.UseMvc();
 
 			using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
 			{
