@@ -16,17 +16,16 @@ namespace FullstackDeveloperAssessment.Data.Context
 				{
 					new PersonType()
 					{
-						Id = 1,
 						Description = "Farmer"						
 					},
 					new PersonType()
 					{
-						Id = 2,
+						
 						Description = "Veterinary"
 					},
 					new PersonType()
 					{
-						Id = 3,
+						
 						Description = "Owner"
 					},
 				});
