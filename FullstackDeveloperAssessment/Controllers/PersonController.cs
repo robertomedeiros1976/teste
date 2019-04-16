@@ -4,15 +4,12 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FullstackDeveloperAssessment.Controllers
 {
 	[EnableCors("CorsPolicy")]
-	[Route("api/[Controller]")]
-	[ApiController]
+	[Route("api/[Controller]")]	
 	public class PersonController : Controller
 	{
 		private PersonLogic _personLogic;

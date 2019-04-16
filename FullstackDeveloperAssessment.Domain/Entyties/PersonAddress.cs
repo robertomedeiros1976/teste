@@ -12,7 +12,7 @@ namespace FullstackDeveloperAssessment.Domain.Entyties
 		public string StateProvinceRegion { get; set; }
 		public string PostalZipCode { get; set; }
 		public string Country { get; set; }
-
+		public int PersonVAT { get; set; }
 		public virtual Person Person { get; set; }		
 	}
 }

@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { appRoutes } from '../routes';
 
@@ -9,7 +12,8 @@ import { PersonComponent } from './person/person.component';
 import { AboutComponent } from './about/about.component';
 import { PersonFormComponent } from './person-form/person-form.component';
 import { LastRecordsComponent } from './last-records/last-records.component';
-import { RouterModule } from '@angular/router';
+
+import { PersonService } from './person/person.service';
 
 @NgModule({
   declarations: [
@@ -18,13 +22,15 @@ import { RouterModule } from '@angular/router';
     PersonComponent,
     AboutComponent,
     PersonFormComponent,
-    LastRecordsComponent
+    LastRecordsComponent    
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [PersonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
