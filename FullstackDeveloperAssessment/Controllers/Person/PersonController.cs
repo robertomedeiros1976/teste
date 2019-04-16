@@ -10,6 +10,7 @@ namespace FullstackDeveloperAssessment.Controllers
 {
 	[EnableCors("CorsPolicy")]
 	[Route("api/[Controller]")]	
+	[ApiController]
 	public class PersonController : Controller
 	{
 		private PersonLogic _personLogic;
@@ -22,6 +23,14 @@ namespace FullstackDeveloperAssessment.Controllers
 		}
 
 		[HttpGet]
+		[Route("sayhello")]
+		public string SayHello()
+		{
+			return "Hello boy!!";
+		}
+
+		[HttpGet]
+		[Route("persons")]
 		public IActionResult Get()
 		{
 			try
