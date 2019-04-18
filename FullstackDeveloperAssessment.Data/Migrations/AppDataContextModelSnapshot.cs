@@ -21,9 +21,13 @@ namespace FullstackDeveloperAssessment.Data.Migrations
 
             modelBuilder.Entity("FullstackDeveloperAssessment.Domain.Entyties.Person", b =>
                 {
-                    b.Property<int>("VAT");
+                    b.Property<int>("VAT")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<DateTime>("DateOfRecord");
 
                     b.Property<int>("Gender");
 
@@ -57,7 +61,7 @@ namespace FullstackDeveloperAssessment.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(30);
 
-                    b.Property<int?>("PersonVAT");
+                    b.Property<int>("PersonVAT");
 
                     b.Property<string>("PostalZipCode")
                         .IsRequired()
@@ -69,7 +73,8 @@ namespace FullstackDeveloperAssessment.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonVAT");
+                    b.HasIndex("PersonVAT")
+                        .IsUnique();
 
                     b.ToTable("PersonAddresses");
                 });
@@ -90,7 +95,7 @@ namespace FullstackDeveloperAssessment.Data.Migrations
 
                     b.HasIndex("PersonVAT");
 
-                    b.ToTable("PersonPersonType");
+                    b.ToTable("PersonsPersonTypes");
                 });
 
             modelBuilder.Entity("FullstackDeveloperAssessment.Domain.Entyties.PersonType", b =>
@@ -108,19 +113,12 @@ namespace FullstackDeveloperAssessment.Data.Migrations
                     b.ToTable("PersonTypes");
                 });
 
-            modelBuilder.Entity("FullstackDeveloperAssessment.Domain.Entyties.Person", b =>
-                {
-                    b.HasOne("FullstackDeveloperAssessment.Domain.Entyties.PersonAddress", "PersonAddress")
-                        .WithMany()
-                        .HasForeignKey("VAT")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("FullstackDeveloperAssessment.Domain.Entyties.PersonAddress", b =>
                 {
                     b.HasOne("FullstackDeveloperAssessment.Domain.Entyties.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonVAT");
+                        .WithOne("PersonAddress")
+                        .HasForeignKey("FullstackDeveloperAssessment.Domain.Entyties.PersonAddress", "PersonVAT")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("FullstackDeveloperAssessment.Domain.Entyties.PersonPersonType", b =>
