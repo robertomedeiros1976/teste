@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using FullstackDeveloperAssessment.Logic.Logics;
-using FullstackDeveloperAssessment.Domain.Entyties;
-using Microsoft.AspNetCore.Http;
+using FullstackDeveloperAssessment.Logic.Interfaces;
 using System;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace FullstackDeveloperAssessment.API.Controllers
@@ -11,34 +10,29 @@ namespace FullstackDeveloperAssessment.API.Controllers
 	[ApiController]
 	public class PersonController : ControllerBase
 	{
-		private PersonLogic _personLogic;
-		private PersonTypeLogic _personTypeLogic;
-		
+		protected IPersonLogic _personLogic;
+		protected IPersonTypeLogic _personTypeLogic;
 
-		public PersonController(PersonLogic personLogic, PersonTypeLogic personTypeLogic)
+		public PersonController(IPersonLogic personLogic, IPersonTypeLogic personTypeLogic)
 		{
-			this._personLogic = personLogic;
 			this._personTypeLogic = personTypeLogic;
+			this._personLogic = personLogic;			
 		}
 
-		[HttpGet]		
-		public ActionResult<string> Get()
+
+		[HttpGet]
+		public IActionResult Get()
 		{
-			return "Hello boy!!";
+			try
+			{
+				var persons = this._personLogic.SelectAllPerson();				
+				return Ok(persons);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
 		}
-
-		//[HttpGet]		
-		//public IActionResult Get()
-		//{
-		//	try
-		//	{
-		//		return Ok(this._personTypeLogic.SelectAllPersonTypes());
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		return BadRequest(ex.Message);
-		//	}
-		//}
 
 		[HttpGet("{id}")]
 		public IActionResult Get(int Id)

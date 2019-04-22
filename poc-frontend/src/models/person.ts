@@ -1,13 +1,13 @@
 import { Address } from './address';
-import { PersonType } from './personType';
+import { PersonPersonType } from './personPersonType';
 
 
 export class Person {
-    public VAT: number;
+    public Vat: number;
     public Name: string;
-    public Address: Address;
+    public PersonAddress: Address;
     public DateOfBirth: Date;
-    public personTypes: PersonType[];
+    public PersonPersonTypes: PersonPersonType[];
     public Gender: Gender;
     public SecretCode: string;
     public DateOfRecord: Date;

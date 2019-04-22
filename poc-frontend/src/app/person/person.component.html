@@ -3,8 +3,6 @@
     <tr>
       <th>VAT</th>
       <th>Name</th>
-      <th>Gender</th>
-      <th>State/Province/Region</th>      
       <th>Date of birth</th>
       <th></th>
     </tr>
@@ -13,8 +11,6 @@
     <tr *ngFor="let person of persons">
       <td>{{ person.vat }}</td>
       <td>{{ person.name }}</td>
-      <td>{{ person.gender }}</td>
-      <td>{{ person.address.StateProvinceRegion }}</td>      
       <td>{{ person.dateOfBirth }}}</td>
       <td></td>
     </tr>

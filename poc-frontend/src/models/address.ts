@@ -5,5 +5,6 @@ export class Address {
     public StateProvinceRegion: string;
     public PostalZipCode: string;
     public Country: string;  
+    public PersonVAT: number;
     
 }

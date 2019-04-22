@@ -1,5 +1,6 @@
 ﻿using FullstackDeveloperAssessment.Domain.Entyties;
 using FullstackDeveloperAssessment.Domain.Interfaces;
+using FullstackDeveloperAssessment.Logic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FullstackDeveloperAssessment.Logic.Logics
 {
-	public class PersonLogic 
+	public class PersonLogic : IPersonLogic 
 	{
 		private IPersonService _service;
 
@@ -28,23 +29,11 @@ namespace FullstackDeveloperAssessment.Logic.Logics
 			}
 		}
 
-		public IEnumerable<Person> SelectLastRecords()
+		public async Task<Person> SavePerson(Person person)
 		{
 			try
 			{
-				return _service.ListLastPersons();
-			}
-			catch (Exception ex)
-			{
-				throw new Exception(ex.Message);
-			}
-		}
-
-		public IEnumerable<Person> SelectAllPerson()
-		{
-			try
-			{
-				return _service.ListPersons();
+				return await _service.Save(person);
 			}
 			catch (Exception ex)
 			{
@@ -64,11 +53,11 @@ namespace FullstackDeveloperAssessment.Logic.Logics
 			}
 		}
 
-		public async Task<Person> SavePerson(Person person)
+		public IEnumerable<Person> SelectAllPerson()
 		{
 			try
 			{
-				return await _service.Save(person);
+				return _service.ListPersons();
 			}
 			catch (Exception ex)
 			{
@@ -76,7 +65,17 @@ namespace FullstackDeveloperAssessment.Logic.Logics
 			}
 		}
 
-
+		public IEnumerable<Person> SelectLastRecords()
+		{
+			try
+			{
+				return _service.ListLastPersons();
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+		}
 	}
 
 }

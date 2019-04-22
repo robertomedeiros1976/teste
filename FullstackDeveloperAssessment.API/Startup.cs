@@ -1,4 +1,9 @@
 ﻿using FullstackDeveloperAssessment.Data.Context;
+using FullstackDeveloperAssessment.Data.Repository;
+using FullstackDeveloperAssessment.Domain.Interfaces;
+using FullstackDeveloperAssessment.Logic.Interfaces;
+using FullstackDeveloperAssessment.Logic.Logics;
+using FullstackDeveloperAssessment.Service.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +32,9 @@ namespace FullstackDeveloperAssessment.API
 		{
 			var sqlConnection = _configuration.GetConnectionString("AppConnection");
 			services.AddDbContext<AppDataContext>(options => options.UseSqlServer(sqlConnection, b => b.MigrationsAssembly("FullstackDeveloperAssessment.Data")));
+
+			this.ConfigureServicesUnit(services);
+			this.ConfigureRepositoriesUnit(services);
 
 			services.AddCors(options => {
 				options.AddPolicy("CorsPolicy", builder => {
@@ -59,18 +67,17 @@ namespace FullstackDeveloperAssessment.API
 
 		public void ConfigureServicesUnit(IServiceCollection services)
 		{
-			//services.AddTransient<ILoginBLL, LoginBLL>();
-			//services.AddTransient<IUsuarioBLL, UsuarioBLL>();
-			//services.AddTransient<IPerfilBLL, PerfilBLL>();
-			//services.AddTransient<IUsuarioService, UsuarioService>();
-			//services.AddTransient<IPerfilService, PerfilService>();
+			services.AddTransient<IPersonLogic, PersonLogic>();
+			services.AddTransient<IPersonTypeLogic, PersonTypeLogic>();			
+			services.AddTransient<IPersonService, PersonService>();
+			services.AddTransient<IPersonTypeService, PersonTypeService>();
 
 		}
 
 		public void ConfigureRepositoriesUnit(IServiceCollection services)
 		{
-			//services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-			//services.AddScoped<IPerfilRepository, PerfilRepository>();
+			services.AddScoped<IPersonRepository, PersonRepository>();
+			services.AddScoped<IPersonTypeRepository, PersonTypeRepository>();
 		}
 	}
 }
