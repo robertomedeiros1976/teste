@@ -1,3 +1,5 @@
+import { Person } from './person';
+
 export class Address {
     public Id: number;
     public Address: string;
@@ -6,5 +8,5 @@ export class Address {
     public PostalZipCode: string;
     public Country: string;  
     public PersonVAT: number;
-    
+    public Person: Person;    
 }

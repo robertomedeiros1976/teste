@@ -11,7 +11,13 @@ namespace FullstackDeveloperAssessment.Data.Mapping
 	{
 		public void Configure(EntityTypeBuilder<Person> builder)
 		{
-			builder.HasKey(p => p.VAT);							
+			builder.HasKey(p => p.VAT);
+
+			builder.HasOne(p => p.PersonAddress)
+				.WithOne(p => p.Person);
+
+			builder.HasMany(p => p.PersonPersonTypes)
+				.WithOne(p => p.Person);
 
 			builder.Property(p => p.Name)
 				.IsRequired()

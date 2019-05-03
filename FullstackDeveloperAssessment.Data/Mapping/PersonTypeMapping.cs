@@ -11,6 +11,10 @@ namespace FullstackDeveloperAssessment.Data.Mapping
 		{
 			builder.HasKey(p => p.Id);
 
+			builder.HasMany(p => p.PersonPersonTypes)
+				.WithOne(p => p.PersonType)
+				.HasForeignKey(p => p.PersonTypeId);
+
 			builder.Property(p => p.Description)
 				.IsRequired()
 				.HasMaxLength(30);

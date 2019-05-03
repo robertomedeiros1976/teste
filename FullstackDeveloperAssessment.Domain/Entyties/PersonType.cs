@@ -6,12 +6,11 @@ namespace FullstackDeveloperAssessment.Domain.Entyties
 {
 	public class PersonType
 	{
-		public int Id { get; set; }
-		//public int PersonVAT { get; set; }
+		public int Id { get; set; }		
 		public string Description { get; set; }
-
-		public virtual IEnumerable<PersonPersonType> PersonPersonTypes { get; set; }
-
+		public IEnumerable<PersonPersonType> PersonPersonTypes { get; set; }
 		
+
+
 	}
 }
